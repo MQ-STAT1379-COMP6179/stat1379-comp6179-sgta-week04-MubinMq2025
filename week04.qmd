@@ -684,7 +684,8 @@ filter(babynames, name == Sea)
 **Your corrected code:**
 ```{r fix-code-student, eval=FALSE}
 # Fixed code here:
-
+filter(babynames, name == "Sea")
+filter(babynames, name == "Sea")
 
 ```
 
@@ -699,7 +700,14 @@ Which name was the most popular for a single gender in a single year? Compare ar
 ```{r popular-names-student, eval=FALSE}
 # Your code to find highest proportion:
 
+babynames |>
+  arrange(desc(prop)) |>
+  head(5)
+#Arranging by count n
 
+babynames |>
+  arrange(desc(prop)) |>
+  head(5)
 # Your code to find highest count:
 
 
@@ -720,7 +728,11 @@ Write a pipeline that will:
 
 ```{r girls-2017-student, eval=FALSE}
 # Your pipeline here:
-
+babynames |>
+  filter(year == 2017) |>
+  select (name, n) |>
+  arrange(desc(n)) |>
+  head(3)
 
 ```
 
@@ -799,6 +811,13 @@ cholesterol_data
 # Your tasks:
 # 1. Convert to long format
 # 2. Calculate n, mean, and standard deviation for each diet group
+cholesterol_tidy <- cholesterol_data |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "diet",
+    values_to = "cholesterol"
+  )
+cholesterol_tidy
 ```
 
 ```{r cholesterol-solution-student, eval=FALSE}
