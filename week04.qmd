@@ -850,9 +850,24 @@ d. Store back in appropriate place
 
 ```{r calculate-rates-student, eval=FALSE}
 # Your approach for table2:
-
+table2 |>
+  pivot_wider(
+    names_from = type,
+    values_from = count,
+  ) |>
+  mutate(rate = cases/population )
 
 # Your approach for table3:
+table3 |>
+  separate_wider_delim(
+    cols = rate,
+    delim = "/"
+    names = c("cases","population")
+  ) |>
+  mutate(cases = as.numeric(cases),
+         population = as.numeric(population),
+         rate = cases / population *1000
+         )
 
 
 ```
